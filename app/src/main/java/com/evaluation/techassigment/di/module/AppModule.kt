@@ -10,6 +10,7 @@ import okhttp3.logging.HttpLoggingInterceptor
 import org.koin.android.ext.koin.androidContext
 import org.koin.dsl.module
 import retrofit2.Retrofit
+import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
 
@@ -19,7 +20,7 @@ import java.util.concurrent.TimeUnit
 
 val appModule = module {
     single { provideOkHttpClient() }
-    single { provideRetrofit(get(), UrlConstants.BASE_URL) }
+    single { provideRetrofit(get()) }
     single { provideApiService(get()) }
     single { provideNetworkHelper(androidContext()) }
 }
@@ -42,12 +43,11 @@ private fun provideOkHttpClient() = if (BuildConfig.DEBUG) {
     .build()
 
 private fun provideRetrofit(
-    okHttpClient: OkHttpClient,
-    BASE_URL: String
+    okHttpClient: OkHttpClient
 ): Retrofit =
     Retrofit.Builder()
         .addConverterFactory(GsonConverterFactory.create())
-        .baseUrl(BASE_URL)
+        .baseUrl(UrlConstants.BASE_URL)
         .client(okHttpClient)
         .build()
 
