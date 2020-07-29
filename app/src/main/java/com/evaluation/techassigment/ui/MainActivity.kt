@@ -8,12 +8,14 @@ import androidx.navigation.fragment.NavHostFragment
 import com.evaluation.techassigment.R
 import com.evaluation.techassigment.databinding.ActivityMainBinding
 import com.evaluation.techassigment.ui.base.BaseActivity
+import com.evaluation.techassigment.ui.callbacks.ITitleCallBack
+import com.evaluation.techassigment.utils.Logger
 
 /**
  * Class which is an activity extending base activity,
  * Which includes fragment to show about country list
  */
-class MainActivity : BaseActivity() {
+class MainActivity : BaseActivity() , ITitleCallBack {
     private var binding: ActivityMainBinding? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -37,5 +39,10 @@ class MainActivity : BaseActivity() {
         val host = NavHostFragment.create(R.navigation.nav_graph)
         supportFragmentManager.beginTransaction().replace(R.id.container, host)
             .setPrimaryNavigationFragment(host).commit()
+    }
+
+    override fun onTittleReceived(title: String?) {
+        Logger.d("TITLE","---- TITTLE----")
+        binding?.titleText?.text = title
     }
 }

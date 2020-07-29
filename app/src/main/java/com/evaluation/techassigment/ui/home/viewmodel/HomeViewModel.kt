@@ -25,12 +25,12 @@ class HomeViewModel(
         get() = _countryDetail
 
     init {
-        fetchDetails()
+        fetchDetails(false)
     }
 
-    private fun fetchDetails() {
+     fun fetchDetails(isFromLazy: Boolean) {
         viewModelScope.launch {
-            _countryDetail.postValue(Resource.loading(null))
+            if(!isFromLazy) _countryDetail.postValue(Resource.loading(null))
             if (networkHelper.isNetworkConnected()) {
                 homeRepository.getCountryDetails().let {
                     if (it.isSuccessful) {
