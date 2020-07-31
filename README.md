@@ -1,4 +1,4 @@
-# techassignment
+# TechAssignment
 This repository mainly focuses on Base Structure creation with latest features that Kotlin Supports, Used 100% Kotlin language
 
 # Technical Details :
