@@ -28,12 +28,12 @@ import org.koin.android.viewmodel.ext.android.viewModel
  * Created by Naveen on 28-07-2020.
  */
 class HomeFragment : BaseFragment() {
+    private val TAG: String = HomeFragment::class.java.name
     private val visibleThreshold: Int = 4
     private var loading: Boolean = false
     private var lastVisibleItem: Int = 0
     private var totalItemCount: Int = 0
     private lateinit var adapter: HomeAdapter
-    private val TAG: String = HomeFragment::class.java.name;
     private val homeViewModel: HomeViewModel by viewModel()
     private var binding: HomeFragmentLytBinding? = null
     private var listener: ITitleCallBack? = null
@@ -91,7 +91,7 @@ class HomeFragment : BaseFragment() {
                     progressBar.visibility = View.GONE
                     bottom_progress.visibility = View.GONE
                     loading = false
-                    listener?.onTittleReceived(it.data?.title)
+                    listener?.onTittleReceived(it.data?.title,false)
                     it.data?.detailList?.let { detailsList ->
                         renderList(detailsList)
                     }

@@ -1,54 +1,74 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
-<androidx.cardview.widget.CardView
-    android:id="@+id/card_view"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:elevation="@dimen/dimen_5dp"
-    android:layout_margin="@dimen/dimen_10dp"
-    android:background="@color/white">
+    <data>
+        <variable
+            name="item"
+            type="com.evaluation.techassigment.datamodel.response.Detail" />
+    </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/constraint_lyt"
+    <androidx.cardview.widget.CardView
+        android:id="@+id/card_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/dimen_10dp"
-        >
+        android:background="@color/white"
+        android:elevation="@dimen/dimen_5dp">
 
-        <TextView
-            android:id="@+id/title"
-            android:layout_width="0dp"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraint_lyt"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="@dimen/dimen_5dp"
-            android:textSize="@dimen/dimen_18sp"
-            android:textStyle="bold"
-            android:textColor="@color/color_black"
-            app:layout_constraintEnd_toStartOf="@+id/image"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            android:layout_margin="@dimen/dimen_10dp">
 
-        <TextView
-            android:id="@+id/description"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:textSize="@dimen/dimen_16sp"
-            android:layout_marginTop="@dimen/dimen_2dp"
-            android:padding="@dimen/dimen_5dp"
-            app:layout_constraintEnd_toStartOf="@+id/image"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/title" />
+            <TextView
+                android:id="@+id/title"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/dimen_5dp"
+                android:textColor="@color/color_546898"
+                android:textSize="@dimen/dimen_20sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:title="@{item.title}" />
 
-        <ImageView
-            android:id="@+id/image"
-            android:layout_width="150dp"
-            android:layout_height="150dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/ic_launcher_background"
-            android:contentDescription="@string/imges_of_places"/>
+            <TextView
+                android:id="@+id/description"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dimen_2dp"
+                android:padding="@dimen/dimen_5dp"
+                android:textColor="@color/color_464646"
+                android:textSize="@dimen/dimen_16sp"
+                app:description="@{item.description}"
+                app:layout_constraintEnd_toStartOf="@+id/image"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/title" />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            <ImageView
+                android:id="@+id/image"
+                android:layout_width="@dimen/dimen_120dp"
+                android:layout_height="@dimen/dimen_100dp"
+                android:contentDescription="@string/imges_of_places"
+                app:layout_constraintEnd_toStartOf="@id/right_arrow"
+                app:layout_constraintTop_toBottomOf="@+id/title"
+                app:loadImage="@{item.imageURL}" />
 
-</androidx.cardview.widget.CardView>
+
+            <ImageView
+                android:id="@+id/right_arrow"
+                android:layout_width="@dimen/dimen_40dp"
+                android:layout_height="@dimen/dimen_35dp"
+                android:contentDescription="@string/imges_of_places"
+                android:src="@drawable/ic_right_arrow"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.cardview.widget.CardView>
 </layout>
