@@ -9,17 +9,17 @@ import androidx.databinding.DataBindingUtil
 import androidx.navigation.fragment.navArgs
 import com.evaluation.techassigment.R
 import com.evaluation.techassigment.databinding.DetailFragmentBinding
-import com.evaluation.techassigment.datamodel.response.Detail
 import com.evaluation.techassigment.ui.base.BaseFragment
 import com.evaluation.techassigment.ui.callbacks.ITitleCallBack
-import com.evaluation.techassigment.utils.DataBindingUtility.setTitle
 
 /**
  * Created by Naveen on 30-07-2020.
+ *
+ * Fragment to show detail of the selected item
  */
 class DetailFragment : BaseFragment() {
     private lateinit var binding: DetailFragmentBinding
-    val detailArgs:DetailFragmentArgs by navArgs()
+    private val detailArgs:DetailFragmentArgs by navArgs()
     private var listener: ITitleCallBack? = null
 
     override fun onAttach(context: Context) {

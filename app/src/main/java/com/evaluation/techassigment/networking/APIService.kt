@@ -1,3 +1,5 @@
+@file:Suppress("SpellCheckingInspection", "SpellCheckingInspection", "SpellCheckingInspection")
+
 package com.evaluation.techassigment.networking
 
 import com.evaluation.techassigment.datamodel.response.CountryDetailResponse

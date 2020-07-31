@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<lint>
+    <issue id="IconLauncherShape">
+        <ignore path="src/main/res/mipmap-hdpi/logo_icon.png" />
+        <ignore path="src/main/res/mipmap-mdpi/logo_icon.png" />
+        <ignore path="src/main/res/mipmap-xhdpi/logo_icon.png" />
+        <ignore path="src/main/res/mipmap-xhdpi/logo_icon.png" />
+        <ignore path="src/main/res/mipmap-xhdpi/logo_icon.png" />
+        <ignore path="src/main/res/mipmap-xxhdpi/logo_icon.png" />
+        <ignore path="src/main/res/mipmap-xxhdpi/logo_icon.png" />
+        <ignore path="src/main/res/mipmap-xxhdpi/logo_icon.png" />
+        <ignore path="src/main/res/mipmap-xxxhdpi/logo_icon.png" />
+    </issue>
+</lint>
