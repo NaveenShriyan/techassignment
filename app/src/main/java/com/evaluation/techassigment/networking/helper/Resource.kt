@@ -2,6 +2,8 @@ package com.evaluation.techassigment.networking.helper
 
 /**
  * Created by Naveen on 28-07-2020.
+ *
+ * Generic class for holding the status of network call and pass back to UI to display the message
  */
 data class Resource<T>(val status: Status, val data: T?, val message: String?) {
 

@@ -1,7 +1,6 @@
 package com.evaluation.techassigment.ui.home.view
 
 import android.content.Context
-import android.opengl.Visibility
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -9,10 +8,10 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
-import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.evaluation.techassigment.R
+import com.evaluation.techassigment.application.Constants
 import com.evaluation.techassigment.databinding.HomeFragmentLytBinding
 import com.evaluation.techassigment.datamodel.response.Detail
 import com.evaluation.techassigment.networking.helper.Status
@@ -26,9 +25,10 @@ import org.koin.android.viewmodel.ext.android.viewModel
 
 /**
  * Created by Naveen on 28-07-2020.
+ *
+ * Home Fragment which will be responsible to show list of items dynamically
  */
 class HomeFragment : BaseFragment() {
-    private val TAG: String = HomeFragment::class.java.name
     private val visibleThreshold: Int = 4
     private var loading: Boolean = false
     private var lastVisibleItem: Int = 0
@@ -57,37 +57,38 @@ class HomeFragment : BaseFragment() {
         return binding?.root
     }
 
+    /**
+     * method used to detect the end of the list and implement lazy loading in the recyclerview
+     */
     private fun setScrollListener() {
         recycler.addOnScrollListener(object : RecyclerView.OnScrollListener() {
             override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
                 super.onScrolled(recyclerView, dx, dy)
-                Logger.d("SCROLLLL", "Dx Value ${dx} Dy value ${dy}")
                 if (dy > 0) {
-                    totalItemCount = linearLayoutManager.getItemCount();
+                    totalItemCount = linearLayoutManager.itemCount
                     lastVisibleItem = linearLayoutManager
-                        .findLastVisibleItemPosition();
+                        .findLastVisibleItemPosition()
                     if (!loading
                         && totalItemCount <= (lastVisibleItem + visibleThreshold)
                     ) {
                         //End of the items
                         bottom_progress.visibility = View.VISIBLE
                         homeViewModel.fetchDetails(true)
-                        Logger.d("LAZY", "END REACHED")
                         loading = true
                     }
                 }
             }
-
-            override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
-                super.onScrollStateChanged(recyclerView, newState)
-            }
         })
     }
 
+    /**
+     * method used to setup the observer and make api call
+     */
     private fun setUpObserver() {
-        homeViewModel.countryDetail.observe(viewLifecycleOwner, Observer { it ->
+        homeViewModel.countryDetail.observe(viewLifecycleOwner, Observer {
             when (it.status) {
                 Status.SUCCESS -> {
+                    Logger.d(Constants.LOGGER_NAME,"Response Recieved")
                     progressBar.visibility = View.GONE
                     bottom_progress.visibility = View.GONE
                     loading = false
@@ -102,6 +103,7 @@ class HomeFragment : BaseFragment() {
                     recycler.visibility = View.GONE
                 }
                 Status.ERROR -> {
+                    Logger.e(Constants.LOGGER_NAME,"Error")
                     //Handle Error
                     progressBar.visibility = View.GONE
                     Toast.makeText(activity, it.message, Toast.LENGTH_LONG).show()
@@ -110,8 +112,10 @@ class HomeFragment : BaseFragment() {
         })
     }
 
+    /**
+     * method used to initialize the UI components
+     */
     private fun setupUI() {
-        Logger.d(TAG, "Activity Instance $activity")
         recycler = binding?.recycler as RecyclerView
         linearLayoutManager = LinearLayoutManager(activity)
         recycler.layoutManager = linearLayoutManager
@@ -119,6 +123,9 @@ class HomeFragment : BaseFragment() {
         recycler.adapter = adapter
     }
 
+    /**
+     * method used to pass the recieved list to adapter to create list of items
+     */
     private fun renderList(detailList: List<Detail>) {
         adapter.addData(detailList)
         adapter.notifyDataSetChanged()

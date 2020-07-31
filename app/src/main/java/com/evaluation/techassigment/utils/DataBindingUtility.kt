@@ -7,7 +7,6 @@ import androidx.appcompat.widget.AppCompatTextView
 import androidx.databinding.BindingAdapter
 import com.bumptech.glide.Glide
 import com.evaluation.techassigment.application.Constants
-import kotlinx.android.synthetic.main.item_lyt.view.*
 
 /**
  * Created by Naveen on 27-07-2020.
@@ -30,7 +29,7 @@ object DataBindingUtility {
     @BindingAdapter("app:loadImage")
     fun loadImage(imageView: ImageView, url: String?) {
 
-        var imageURL: String? = url ?: Constants.DEFAULT_IMAGE_URL
+        val imageURL: String? = url ?: Constants.DEFAULT_IMAGE_URL
 
         Glide.with(imageView.context)
             .load(imageURL)

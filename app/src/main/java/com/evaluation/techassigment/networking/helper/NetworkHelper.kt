@@ -7,6 +7,8 @@ import android.os.Build
 
 /**
  * Created by Naveen on 28-07-2020.
+ *
+ * Class which will check for the Internet connection availability
  */
 @Suppress("DEPRECATION")
 class NetworkHelper constructor(private val context: Context){

@@ -1,20 +1,13 @@
 package com.evaluation.techassigment.ui
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MenuItem
-import androidx.appcompat.widget.Toolbar
 import androidx.databinding.DataBindingUtil
-import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentManager
-import androidx.navigation.NavController
-import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
 import com.evaluation.techassigment.R
 import com.evaluation.techassigment.databinding.ActivityMainBinding
 import com.evaluation.techassigment.ui.base.BaseActivity
 import com.evaluation.techassigment.ui.callbacks.ITitleCallBack
-import com.evaluation.techassigment.utils.Logger
 
 /**
  * Class which is an activity extending base activity,
@@ -35,7 +28,7 @@ class MainActivity : BaseActivity(), ITitleCallBack {
         val toolbar = binding?.toolBar
         setSupportActionBar(toolbar)
         // Remove default title text
-        supportActionBar?.setDisplayShowTitleEnabled(false);
+        supportActionBar?.setDisplayShowTitleEnabled(false)
         binding?.titleText?.text = getString(R.string.about_country_title)
     }
 
@@ -47,7 +40,6 @@ class MainActivity : BaseActivity(), ITitleCallBack {
     }
 
     override fun onTittleReceived(title: String?, isFromDetail: Boolean) {
-        Logger.d("TITLE", "---- TITTLE----")
         supportActionBar?.setDisplayHomeAsUpEnabled(isFromDetail)
         binding?.titleText?.text = title
     }

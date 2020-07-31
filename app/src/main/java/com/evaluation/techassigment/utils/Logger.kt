@@ -22,11 +22,4 @@ object Logger {
 
         }
     }
-
-    @JvmStatic
-    fun printStackTrace(e: Exception) {
-        if (BuildConfig.DEBUG) {
-            e.printStackTrace()
-        }
-    }
 }

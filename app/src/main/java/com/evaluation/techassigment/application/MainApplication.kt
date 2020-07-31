@@ -14,6 +14,7 @@ class MainApplication : Application() {
 
     override fun onCreate() {
         super.onCreate()
+        //starting Koin dependency injection
         startKoin {
             androidContext(this@MainApplication)
             modules(listOf(appModule, repoModule, viewModelModule))

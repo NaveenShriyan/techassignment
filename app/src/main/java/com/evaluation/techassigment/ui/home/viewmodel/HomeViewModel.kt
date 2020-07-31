@@ -5,7 +5,6 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.evaluation.techassigment.application.Constants
 import com.evaluation.techassigment.datamodel.response.CountryDetailResponse
-import com.evaluation.techassigment.datamodel.response.Detail
 import com.evaluation.techassigment.networking.helper.NetworkHelper
 import com.evaluation.techassigment.networking.helper.Resource
 import com.evaluation.techassigment.repository.HomeRepository
@@ -28,6 +27,9 @@ class HomeViewModel(
         fetchDetails(false)
     }
 
+    /**
+     * method responsible to call the api
+     */
      fun fetchDetails(isFromLazy: Boolean) {
         viewModelScope.launch {
             if(!isFromLazy) _countryDetail.postValue(Resource.loading(null))
